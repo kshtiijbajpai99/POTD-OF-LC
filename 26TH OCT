@@ -1,0 +1,56 @@
+// 🎯 LeetCode POTD - 26th October 2025
+// 🔹 Problem: 2043. Simple Bank System
+// 🔹 Difficulty: Medium
+// 🔹 Language: C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Bank {
+public:
+    vector<long long> bal; // stores balances of all accounts
+
+    // Constructor to initialize balances
+    Bank(vector<long long>& balance) {
+        bal = balance;
+    }
+
+    // Transfer money from account1 to account2
+    bool transfer(int account1, int account2, long long money) {
+        if (account1 < 1 || account1 > bal.size() || account2 < 1 || account2 > bal.size())
+            return false; // invalid accounts
+        if (bal[account1 - 1] < money)
+            return false; // not enough balance
+        bal[account1 - 1] -= money;
+        bal[account2 - 1] += money;
+        return true;
+    }
+
+    // Deposit money into an account
+    bool deposit(int account, long long money) {
+        if (account < 1 || account > bal.size())
+            return false; // invalid account
+        bal[account - 1] += money;
+        return true;
+    }
+
+    // Withdraw money from an account
+    bool withdraw(int account, long long money) {
+        if (account < 1 || account > bal.size())
+            return false; // invalid account
+        if (bal[account - 1] < money)
+            return false; // not enough balance
+        bal[account - 1] -= money;
+        return true;
+    }
+};
+
+/**
+ * Example usage:
+ * vector<long long> balance = {100, 200, 300};
+ * Bank* bank = new Bank(balance);
+ * cout << bank->withdraw(1, 50) << endl;    // true
+ * cout << bank->transfer(1, 2, 30) << endl; // true
+ * cout << bank->deposit(3, 100) << endl;    // true
+ * cout << bank->withdraw(3, 500) << endl;   // false
+ */
