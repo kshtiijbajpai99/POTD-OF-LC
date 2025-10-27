@@ -1,0 +1,22 @@
+// 🎯 LeetCode POTD - 26th October 2025
+// 🔹 Problem: 2125. Number of Laser Beams in a Bank
+// 🔹 Difficulty: Medium
+// 🔹 Language: C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int numberOfBeams(vector<string>& bank) {
+        int ans = 0, prev = 0;
+        for (auto& row : bank) {
+            int device = count(row.begin(), row.end(), '1');
+            if (device > 0) {
+                ans += device * prev;
+                prev = device;
+            }
+        }
+        return ans;
+    }
+};
